@@ -2,8 +2,8 @@
 
 void cleantreegrabber(){
 	const Char_t* host = "mysql://seaquel.physics.illinois.edu:3283/";
-	const Char_t* user = "seaguest";
-	const Char_t* pass = "qqbar2mu+mu-"; 
+	const Char_t* user = "user";
+	const Char_t* pass = "user"; 
 	TSQLServer* con = TSQLServer::Connect(host, user, pass); 
 	const int tablenum=4; 
 	TFile *f= new TFile("MonteCarloTrees.root", "RECREATE");
