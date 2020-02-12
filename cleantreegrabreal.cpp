@@ -3,8 +3,8 @@
 void cleantreegrabber(){
     const Char_t* host = "mysql://seaquestdb01.fnal.gov:3310";
     const Char_t* host2 = "mysql://seaquestdb03.fnal.gov:3310";
-	const Char_t* user = "seaguest";
-	const Char_t* pass = "qqbar2mu+mu-"; 
+	const Char_t* user = "user";
+	const Char_t* pass = "user"; 
 	TSQLServer* con = TSQLServer::Connect(host, user, pass); 
 	TSQLServer* con2 = TSQLServer::Connect(host2, user, pass); 
 	TSQLResult* resPtr;
