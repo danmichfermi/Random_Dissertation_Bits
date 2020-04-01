@@ -7,7 +7,7 @@ struct FitPoint{
 	double error;
 	double Loglikelihood=0;
 	double ChiSq;
-	int ndf;
+	int parameters;
 };
 
 class CombinedFit{
@@ -23,9 +23,9 @@ class CombinedFit{
 //calculate Akaike Information Criterion 
 			for(std::size_t i = 0; i != (sizeof CombinedGraphsVal / sizeof CombinedGraphsVal[0]); i++) {
 				if(CombinedGraphsVal[i].Loglikelihood==0){
-					AIC.push_back(2*(Point[i].ndf)-2*Point[i].ChiSq);
+					AIC.push_back(2*(Point[i].parameters)-2*Point[i].ChiSq);
 				}
-				else AIC.push_back(2*(Point[i].ndf)-2* Point[i].Loglikelihood);
+				else AIC.push_back(2*(Point[i].parameters)-2* Point[i].Loglikelihood);
 
 				if(i<1) AIC_min= AIC[0];
 				if(AIC[i]<AIC_min){
@@ -51,8 +51,8 @@ class CombinedFit{
 //allows for additional point to be added to current object
 void CombinedFit::add(FitPoint addition){
 	CombinedGraphsVal.push_back(addition);
-	if(addition.Loglikelihood==0)	AIC.push_back(2*(addition.ndf)-2*addition.ChiSq);
-	else	AIC.push_back(2*addition.ndf-2*addition.Loglikelihood);
+	if(addition.Loglikelihood==0)	AIC.push_back(2*(addition.parameters)-2*addition.ChiSq);
+	else	AIC.push_back(2*addition.parameters-2*addition.Loglikelihood);
 	if(AIC.back()<AIC_min){
 		AIC_min=AIC.back();
 		total_likelihood=0;
@@ -134,7 +134,7 @@ void CombinedFit::PrintValues(){
 //Prints all values
 void CombinedFit::PrintAll(){
 	cout<<"Printing all component fit information:"<<endl;
-	cout<<"Parameter Value, Parameter Error, Log(Likelihood), ChiSq, NDF, AIC, Weights"<<endl;
+	cout<<"Parameter Value, Parameter Error, Log(Likelihood), ChiSq, Parameters, AIC, Weights"<<endl;
 	for(std::size_t i = 0; i != (sizeof CombinedGraphsVal / sizeof CombinedGraphsVal[0]); i++)
 	{
 		cout<<CombinedGraphsVal[i].value<<","<<CombinedGraphsVal[i].error<<","<<CombinedGraphsVal[i].Loglikelihood<<","<<CombinedGraphsVal[i].ChiSq<<","<<CombinedGraphsVal[i].ndf<<","<<AIC[i]<<","<<weights[i]<<endl;
